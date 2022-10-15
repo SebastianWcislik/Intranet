@@ -1,6 +1,0 @@
-[submodule "vendors"]
-	path = vendors
-	url = https://github.com/SebastianWcislik/Intranet
-[submodule "Intranet"]
-	path = Intranet
-	url = https://github.com/SebastianWcislik/Intranet
