@@ -1,0 +1,1 @@
+﻿Scaffold-DBContext "Server=db4free.net;Database=bazadoprojektu12;Uid=superadmin123;Pwd=Admin123;" MySQL.EntityFrameworkCore -OutputDir DBContext -f

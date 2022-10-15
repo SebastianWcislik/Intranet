@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "d6D88L+zxSZaAgFwkui1d8Hdhe6VYpAeSIQqPX+4p5Jknyh7pvgZ6Trc0CypfMIewDh6K0N+UwTEQ8txzKgseg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\seban\\source\\repos\\IntranetAPI\\IntranetAPP\\IntranetAPP.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\seban\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512"
+  ],
+  "logs": []
+}

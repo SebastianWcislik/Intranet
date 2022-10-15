@@ -1,0 +1,72 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<script>
+    function checkUserData() 
+    {
+        var user = localStorage.getItem("user");
+        localStorage.setItem("origin", window.location.origin);
+
+        if (user != null) {
+            window.location.href = localStorage.getItem("origin") + "/main";
+            document.getElementById("navigationTab").style.display = "flex";
+        }
+        else
+        {
+            document.getElementById("navigationTab").style.display = "none";
+        }
+    }
+
+    function Login()
+    {
+        document.getElementById("response").innerText = "";
+        document.getElementById("loader").style.display = "block";
+        var email = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+        if (email == "" || email == undefined || email == null)
+        {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("response").innerText = "Pole email nie może być puste";
+        }
+
+        if (password == "" || password == undefined || password == null) {
+            document.getElementById("loader").style.display = "none";
+            document.getElementById("response").innerText = "Pole hasło nie może być puste";
+        }
+
+        $.get("http://localhost:5249/GetUserToLogin?email=" + email + "&password=" + password, function (data){
+            if (data.statusCode != undefined && data.statusCode == 404)
+            {
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("response").innerText = data.message;
+                return;
+            }
+            else
+            {
+                $.get("http://localhost:5249/GetUserById?id=" + data.id, function (data){
+                    document.getElementById("loader").style.display = "none";
+                    localStorage.setItem("user", data);
+                    localStorage.setItem("origin", window.location.origin);
+                    window.location.href = localStorage.getItem("origin") + "/main";
+                });
+            }
+        });
+    }
+</script>
+
+<body onload="checkUserData()">
+    <div class="text-center">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+        <input id="username" />
+        <input id="password" />
+        <button onclick="Login()">Zaloguj</button>
+        <div style="margin-top: 20px">
+            <div class="loader" id="loader" style="margin-left: auto; margin-right: auto; display: none"></div>
+            <span id="response" style="color: red"></span>
+        </div>
+    </div>
+</body>

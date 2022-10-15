@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "V+nc/bcyN8d5yvSIgeOXcK6QPq2ZpxurfOUPgPa6UIg=",
+  "Source": "IntranetAPI",
+  "BasePath": "_content/IntranetAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
