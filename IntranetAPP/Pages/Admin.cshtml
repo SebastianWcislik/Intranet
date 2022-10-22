@@ -1,0 +1,20 @@
+﻿@page
+@model IntranetAPP.Pages.AdminModel
+@{
+}
+<head>
+    <script>
+        function activate() 
+        {
+            checkUserPriviliges();
+            setLoginData();
+            checkIfCorrectPrivilige("Admin", "Niepoprawne uprawnienia do wykonania akcji.");
+        }
+    </script>
+</head>
+
+<body onload="activate()">
+    <div class="container">
+
+    </div>
+</body>

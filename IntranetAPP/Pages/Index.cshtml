@@ -5,19 +5,9 @@
 }
 
 <script>
-    function checkUserData() 
+    function activate()
     {
-        var user = localStorage.getItem("user");
-        localStorage.setItem("origin", window.location.origin);
-
-        if (user != null) {
-            window.location.href = localStorage.getItem("origin") + "/main";
-            document.getElementById("navigationTab").style.display = "flex";
-        }
-        else
-        {
-            document.getElementById("navigationTab").style.display = "none";
-        }
+        checkUserData();
     }
 
     function Login()
@@ -49,8 +39,9 @@
             {
                 $.get("http://localhost:5249/GetUserById?id=" + data.id, function (data){
                     document.getElementById("loader").style.display = "none";
-                    localStorage.setItem("user", data);
+                    localStorage.setItem("user", JSON.stringify(data));
                     localStorage.setItem("origin", window.location.origin);
+
                     window.location.href = localStorage.getItem("origin") + "/main";
                 });
             }
@@ -58,11 +49,11 @@
     }
 </script>
 
-<body onload="checkUserData()">
+<body onload="activate()">
     <div class="text-center">
         <h1 class="display-4">@ViewData["Title"]</h1>
         <input id="username" />
-        <input id="password" />
+        <input id="password" type="password" />
         <button onclick="Login()">Zaloguj</button>
         <div style="margin-top: 20px">
             <div class="loader" id="loader" style="margin-left: auto; margin-right: auto; display: none"></div>

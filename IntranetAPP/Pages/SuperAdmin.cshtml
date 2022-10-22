@@ -1,0 +1,20 @@
+﻿@page
+@model IntranetAPP.Pages.SuperAdminModel
+@{
+}
+<head>
+    <script>
+        function activate()
+        {
+            checkUserPriviliges();
+            setLoginData();
+            checkIfCorrectPrivilige("SuperAdmin", "Niepoprawne uprawnienia do wykonania akcji.");
+        }
+    </script>
+</head>
+
+<body onload="activate()">
+    <div class="container">
+
+    </div>
+</body>

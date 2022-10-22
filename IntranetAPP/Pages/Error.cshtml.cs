@@ -9,8 +9,11 @@ namespace IntranetAPP.Pages
     public class ErrorModel : PageModel
     {
         public string? RequestId { get; set; }
+        public string? Message { get; set; }
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+
+        public bool ShowMessage => !string.IsNullOrEmpty(Message);
 
         private readonly ILogger<ErrorModel> _logger;
 
@@ -19,9 +22,10 @@ namespace IntranetAPP.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public void OnGet(string Message)
         {
-            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+            this.RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+            this.Message = Message;
         }
     }
 }
