@@ -23,12 +23,19 @@ function checkUserData() {
 function checkUserPriviliges() {
     var user = JSON.parse(localStorage.getItem("user"));
 
+    var adminDisp = document.getElementById("admin").style.display;
+    var superAdminDisp = document.getElementById("superadmin").style.display;
+
     if (user.priviligeName == "Admin") {
-        document.getElementById("admin").style.display = "block";
-        document.getElementById("superadmin").style.display = "none";
+        adminDisp = "block";
+        superAdminDisp = "none";
     } else if (user.priviligeName == "SuperAdmin") {
-        document.getElementById("superadmin").style.display = "block";
-        document.getElementById("admin").style.display = "none";
+        superAdminDisp = "block";
+        adminDisp = "none";
+    }
+    else {
+        adminDisp = "none";
+        superAdminDisp = "none";
     }
 }
 

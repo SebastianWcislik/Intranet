@@ -2,6 +2,7 @@
 using IntranetAPI.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Asn1.X509;
 
 namespace IntranetAPI.Controllers
 {
@@ -51,6 +52,41 @@ namespace IntranetAPI.Controllers
             var news = DbContext.News.ToList();
 
             return Ok(news);
+        }
+
+        [HttpGet]
+        [Route("/GetPriviliges")]
+        public IActionResult GetPriviliges() 
+        {
+            var priviliges = DbContext.Priviliges.OrderBy(x => x.Id).ToList();
+
+            return Ok(priviliges);
+        }
+
+        [HttpPost]
+        [Route("/AddNewUser")]
+        public IActionResult AddNewUser([FromForm]NewUserModel model) 
+        {
+            var newUser = new DBContext.User
+            {
+                Email = model.Email,
+                Password = model.Password,
+                Name = model.Username,
+                Surname = model.Surname,
+                PriviligesId = model.Priviliges
+            };
+
+            DbContext.Users.Add(newUser);
+            DbContext.SaveChanges();
+
+            if (newUser.Id != 0)
+            {
+                return Ok(new { Message = "Dodano nowego użytkownika", StatusCode = 200 });
+            }
+            else
+            {
+                return Ok(new ErrorModel { Message = "Wystąpił bład przy dodawaniu nowego użytkownika", StatusCode = 400 });
+            }
         }
     }
 }
