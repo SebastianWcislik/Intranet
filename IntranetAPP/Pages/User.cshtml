@@ -12,6 +12,40 @@
 </head>
 <body onload="activate()">
     <div class="container">
-
+        <h2>Zmiana hasła</h2>
+        <div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label for="changeOldPass">Stare hasło: </label>
+                        </td>
+                        <td>
+                            <input id="changeOldPass" type="password" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="changeNewPass">Nowe hasło: </label>
+                        </td>
+                        <td>
+                            <input id="changeNewPass" type="password" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="changeNewPass2">Powtórz nowe hasło: </label>
+                        </td>
+                        <td>
+                            <input id="changeNewPass2" type="password" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="changePassword" onclick="changePassword()">Zmień hasło</button>
+            <div>
+                <span id="changeMessage"></span>
+            </div>
+        </div>
     </div>
 </body>

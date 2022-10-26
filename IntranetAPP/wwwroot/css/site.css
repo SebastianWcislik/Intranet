@@ -35,3 +35,8 @@ body {
         transform: rotate(360deg);
     }
 }
+
+table > tbody > tr > td > input, select {
+    margin-left: 30px;
+    width: 100%;
+}

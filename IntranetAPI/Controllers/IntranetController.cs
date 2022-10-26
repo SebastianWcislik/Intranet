@@ -88,5 +88,27 @@ namespace IntranetAPI.Controllers
                 return Ok(new ErrorModel { Message = "Wystąpił bład przy dodawaniu nowego użytkownika", StatusCode = 400 });
             }
         }
+
+        [HttpPost]
+        [Route("/ChangePassword")]
+        public IActionResult ChangePassword([FromForm]ChangePasswordModel model) 
+        {
+            var user = DbContext.Users.Where(x => x.Id == model.Id).FirstOrDefault();
+
+            if (user == null)
+            {
+                return Ok(new { Message = "Nie znaleziono takiego użytkownika", StatusCode = 405 });
+            }
+
+            if (user.Password != model.OldPassword)
+            {
+                return Ok(new { Message = "Stare hasło jest niepoprawne", StatusCode = 405 });
+            }
+
+            user.Password = model.NewPassword;
+            DbContext.SaveChanges();
+
+            return Ok(new { Message = "Udało się zmienić hasło", StatusCode = 200 });
+        }
     }
 }
