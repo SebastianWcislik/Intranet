@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="~/IntranetAPP.styles.css" asp-append-version="true" />
 
     <script>
+        var webApiAddress = "http://localhost:5249";
+        localStorage.setItem("WebApiAddress", webApiAddress);
+
         function Logout()
         {
             var user = localStorage.getItem("user");
@@ -34,6 +37,9 @@
                     <ul class="navbar-nav flex-grow-1" id="navigationTab">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Main">Strona główna</a>
+                        </li>
+                        <li class="nav-item" id="user">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/User">Mój profil</a>
                         </li>
                         <li class="nav-item" id="admin">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Admin">Admin</a>

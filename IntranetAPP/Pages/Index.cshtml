@@ -5,6 +5,8 @@
 }
 
 <script>
+    var webApiAddress = localStorage.getItem("WebApiAddress");
+
     function activate()
     {
         checkUserData();
@@ -28,7 +30,7 @@
             document.getElementById("response").innerText = "Pole hasło nie może być puste";
         }
 
-        $.get("http://localhost:5249/GetUserToLogin?email=" + email + "&password=" + password, function (data){
+        $.get(webApiAddress + "/GetUserToLogin?email=" + email + "&password=" + password, function (data) {
             if (data.statusCode != undefined && data.statusCode == 404)
             {
                 document.getElementById("loader").style.display = "none";
@@ -37,7 +39,7 @@
             }
             else
             {
-                $.get("http://localhost:5249/GetUserById?id=" + data.id, function (data){
+                $.get(webApiAddress + "/GetUserById?id=" + data.id, function (data){
                     document.getElementById("loader").style.display = "none";
                     localStorage.setItem("user", JSON.stringify(data));
                     localStorage.setItem("origin", window.location.origin);

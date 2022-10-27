@@ -3,6 +3,8 @@
 
 // Write your JavaScript code.
 
+var webApiAddress = localStorage.getItem("WebApiAddress");
+
 function checkUserData() {
     var user = JSON.parse(localStorage.getItem("user"));
     localStorage.setItem("origin", window.location.origin);
@@ -25,13 +27,16 @@ function checkUserPriviliges() {
 
     if (user.priviligeName == "Admin") {
         document.getElementById("admin").style.display = "block";
+        document.getElementById("user").style.display = "none";
         document.getElementById("superadmin").style.display = "none";
     } else if (user.priviligeName == "SuperAdmin") {
         document.getElementById("superadmin").style.display = "block";
         document.getElementById("admin").style.display = "none";
+        document.getElementById("user").style.display = "none";
     } else {
         document.getElementById("admin").style.display = "none";
         document.getElementById("superadmin").style.display = "none";
+        document.getElementById("user").style.display = "block";
     }
 }
 
@@ -42,11 +47,11 @@ function setLoginData()
     document.getElementById("surname").innerHTML = user.surname;
 }
 
-function checkIfCorrectPrivilige(privilage, message)
+function checkIfCorrectPrivilige(privilage)
 {
     var user = JSON.parse(localStorage.getItem("user"));
     if (user.priviligeName != privilage) {
-        window.location.href = localStorage.getItem("origin") + "/Error?Message=" + message
+        window.location.href = localStorage.getItem("origin") + "/Error?Message=" + "Niepoprawne uprawnienia do wykonania akcji."
     }
 }
 
@@ -87,7 +92,7 @@ function changePassword()
         newPassword: newPass
     };
 
-    $.post("http://localhost:5249/ChangePassword", body, function (data) {
+    $.post(webApiAddress + "/ChangePassword", body, function (data) {
         if (data.statusCode == 200) {
             document.getElementById("changeOldPass").value = "";
             document.getElementById("changeNewPass").value = "";
@@ -101,6 +106,43 @@ function changePassword()
         }
         else {
             message.innerText = "Wystąpił nieoczekiwany błąd";
+        }
+    });
+}
+
+function addNewNews()
+{
+    var title = document.getElementById("newNewsTitle").value;
+    var description = document.getElementById("newNewsDescription").value;
+
+    var message = document.getElementById("newNewsMessage");
+    message.innerText = "";
+    message.style.color = "red";
+
+    if (title == "" || title == undefined || title == null) {
+        message.innerText = "Pole tytuł nie może być puste";
+        return;
+    }
+
+    if (description == "" || description == undefined || description == null) {
+        message.innerText = "Pole treść powiadomienia nie może być puste";
+        return;
+    }
+
+    var body = {
+        title: title,
+        description: description
+    };
+
+    $.post(webApiAddress + "/AddNewNews", body, function (data) {
+        if (data.statusCode == 200) {
+            message.innerText = data.message;
+            message.style.color = "green";
+            document.getElementById("newNewsTitle").value = "";
+            document.getElementById("newNewsDescription").value = "";
+        }
+        else {
+            message.innerText = data.message;
         }
     });
 }

@@ -36,7 +36,7 @@ body {
     }
 }
 
-table > tbody > tr > td > input, select {
+table > tbody > tr > td > input, select, textarea {
     margin-left: 30px;
     width: 100%;
 }

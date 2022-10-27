@@ -33,14 +33,14 @@ namespace IntranetAPI.Controllers
         public IActionResult GetUserToLogin([FromQuery]string email, [FromQuery]string password)
         {
             var user = DbContext.Users.Where(x => x.Email == email && x.Password == password);
-            if (user.Count() == 0)
+            if (!user.Any())
             {
                 return Ok(new ErrorModel{ Message = "Nie znaleziono takiego użytkownika, bądź hasło jest nieprawidłowe", StatusCode = 404 });
             }
 
             var userFound = user.FirstOrDefault();
             if (userFound != null)
-                return Ok(new { Id = userFound.Id });
+                return Ok(new { userFound.Id });
             else
                 return NotFound(new ErrorModel{ Message = "Nie ma takiego użytkownika", StatusCode = 400});
         }
@@ -85,7 +85,7 @@ namespace IntranetAPI.Controllers
             }
             else
             {
-                return Ok(new ErrorModel { Message = "Wystąpił bład przy dodawaniu nowego użytkownika", StatusCode = 400 });
+                return Ok(new ErrorModel { Message = "Wystąpił błąd przy dodawaniu nowego użytkownika", StatusCode = 400 });
             }
         }
 
@@ -109,6 +109,28 @@ namespace IntranetAPI.Controllers
             DbContext.SaveChanges();
 
             return Ok(new { Message = "Udało się zmienić hasło", StatusCode = 200 });
+        }
+
+        [HttpPost]
+        [Route("/AddNewNews")]
+        public IActionResult AddNewNews([FromForm]NewNewsModel model) 
+        {
+            var message = new DBContext.News {
+                Title = model.Title,
+                Description = model.Description
+            };
+
+            DbContext.News.Add(message);
+            DbContext.SaveChanges();
+
+            if (message.Id != 0)
+            {
+                return Ok(new { Message = "Dodano nowe powiadomienie", StatusCode = 200 });
+            }
+            else
+            {
+                return Ok(new ErrorModel { Message = "Wystąpił błąd przy dodawaniu nowego powiadomienia", StatusCode = 400 });
+            }
         }
     }
 }
