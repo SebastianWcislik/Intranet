@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file ./Intranet/IntranetAPP/Dockerfile --tag sebastianwcislik/intranetapp:dev
+      run: docker build -t --file IntranetAPP/Dockerfile --tag sebastianwcislik/intranetapp:dev
 
     - name: Docker Login
       uses: docker/login-action@v2.1.0
