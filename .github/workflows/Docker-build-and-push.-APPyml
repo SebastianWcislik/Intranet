@@ -1,4 +1,4 @@
-name: Docker-build-and-push
+name: Docker-build-and-push-APP
 
 on:
   push:
@@ -35,4 +35,4 @@ jobs:
         context: .
         file: IntranetAPP/Dockerfile
         push: true
-        tags: sebastianwcislik/intranetapp:dev
+        tags: sebastianwcislik/intranetapp:APP
