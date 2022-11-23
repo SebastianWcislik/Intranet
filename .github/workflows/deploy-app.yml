@@ -24,8 +24,8 @@ jobs:
       -  
         name: Build and push
         uses: docker/build-push-action@v3.2.0
-        #with:
-          #context: https://github.com/SebastianWcislik/Intranet
-          #file: IntranetAPP/Dockerfile
+        with:
+          context: https://github.com/SebastianWcislik/Intranet
+          file: IntranetAPP/Dockerfile
           #push: true
           #tags: sebastianwcislik/intranetapp:dev
