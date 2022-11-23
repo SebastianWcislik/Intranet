@@ -26,4 +26,4 @@ jobs:
     - name: Dockerfile Validator
       uses: ghe-actions/dockerfile-validator@v2
       with:
-        dockerfile: Dockerfile
+        dockerfile: ./Intranet/IntranetAPP/Dockerfile
