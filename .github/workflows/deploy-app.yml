@@ -22,10 +22,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Build and push
-        uses: docker/build-push-action@v3.2.0
+        name: Push Docker GCR
+        uses: RaccoonDev/push-docker-gcr@v1
         with:
-          context: https://github.com/SebastianWcislik/Intranet
-          file: IntranetAPP/Dockerfile
-          push: true
-          tags: sebastianwcislik/intranetapp:dev
+          image_name: sebastianwcislik/intranetapp
+          image_tag: dev
+          
+        #name: Build and push
+        #uses: docker/build-push-action@v3.2.0
+        #with:
+          #context: https://github.com/SebastianWcislik/Intranet
+          #file: IntranetAPP/Dockerfile
+          #push: true
+          #tags: sebastianwcislik/intranetapp:dev
