@@ -23,7 +23,7 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     
-    - name: Build and push Docker images
-      uses: docker/build-push-action@v3.2.0
+    - name: Dockerfile Validator
+      uses: ghe-actions/dockerfile-validator@v2
       with:
-        file: https://github.com/SebastianWcislik/Intranet/blob/main/IntranetAPP/Dockerfile
+        dockerfile: https://github.com/SebastianWcislik/Intranet/blob/main/IntranetAPP/Dockerfile
