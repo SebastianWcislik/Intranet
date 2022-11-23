@@ -26,6 +26,6 @@ jobs:
         uses: docker/build-push-action@v3.2.0
         with:
           context: https://github.com/SebastianWcislik/Intranet/tree/main/IntranetAPP
-          file: https://github.com/SebastianWcislik/Intranet/tree/main/IntranetAPP/Dockerfile
+          file: Dockerfile
           push: true
           tags: sebastianwcislik/intranetapp:dev
