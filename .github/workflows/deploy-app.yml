@@ -22,11 +22,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Push Docker GCR
-        uses: RaccoonDev/push-docker-gcr@v1
-        with:
-          image_name: sebastianwcislik/intranetapp
-          image_tag: dev
+        name: Push Docker
+        uses: opspresso/action-docker@v0.4.0
           
         #name: Build and push
         #uses: docker/build-push-action@v3.2.0
