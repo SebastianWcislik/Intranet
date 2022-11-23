@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       -
+        name: Checkout
+        uses: actions/checkout@v2
+    
+      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       -
@@ -25,7 +29,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v3.2.0
         with:
-          context: https://github.com/SebastianWcislik/Intranet
-          file: IntranetAPP/Dockerfile
+          file: ./Dockerfile
           #push: true
           #tags: sebastianwcislik/intranetapp:dev
