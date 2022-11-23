@@ -31,5 +31,5 @@ jobs:
         with:
           file: https://github.com/SebastianWcislik/Intranet/tree/main/IntranetAPP/Dockerfile
           load: true
-          push: true
+          #push: true
           tags: sebastianwcislik/intranetapp:dev
