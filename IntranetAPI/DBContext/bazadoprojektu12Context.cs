@@ -12,7 +12,7 @@ namespace IntranetAPI.DBContext
         {
         }
 
-        public bazadoprojektu12Context(DbContextOptions<bazadoprojektu12Context> options)
+        public bazadoprojektu12Context(DbContextOptions<bazadoprojektu12Context> options )
             : base(options)
         {
         }
