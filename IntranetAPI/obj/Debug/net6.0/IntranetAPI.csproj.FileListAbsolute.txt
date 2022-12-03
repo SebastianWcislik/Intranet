@@ -50,3 +50,8 @@ C:\Users\seban\source\repos\IntranetAPI\IntranetAPI\obj\Debug\net6.0\refint\Intr
 C:\Users\seban\source\repos\IntranetAPI\IntranetAPI\obj\Debug\net6.0\IntranetAPI.pdb
 C:\Users\seban\source\repos\IntranetAPI\IntranetAPI\obj\Debug\net6.0\IntranetAPI.genruntimeconfig.cache
 C:\Users\seban\source\repos\IntranetAPI\IntranetAPI\obj\Debug\net6.0\ref\IntranetAPI.dll
+C:\Users\seban\source\repos\IntranetAPI\IntranetAPI\obj\Debug\net6.0\staticwebassets\msbuild.IntranetAPI.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\seban\source\repos\IntranetAPI\IntranetAPI\obj\Debug\net6.0\staticwebassets\msbuild.build.IntranetAPI.props
+C:\Users\seban\source\repos\IntranetAPI\IntranetAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.IntranetAPI.props
+C:\Users\seban\source\repos\IntranetAPI\IntranetAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.IntranetAPI.props
+C:\Users\seban\source\repos\IntranetAPI\IntranetAPI\obj\Debug\net6.0\staticwebassets.pack.json

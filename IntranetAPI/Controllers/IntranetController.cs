@@ -132,5 +132,23 @@ namespace IntranetAPI.Controllers
                 return Ok(new ErrorModel { Message = "Wystąpił błąd przy dodawaniu nowego powiadomienia", StatusCode = 400 });
             }
         }
+
+        [HttpPost]
+        [Route("/DeleteNews")]
+        public IActionResult DeleteNews([FromQuery]int Id) 
+        {
+            var news = DbContext.News.FirstOrDefault(x => x.Id == Id);
+
+            if (news != null)
+            {
+                DbContext.News.Remove(news);
+                DbContext.SaveChanges();
+                return Ok(new { Message = "Usunięto powiadomienie.", StatusCode = 200 });
+            }
+            else
+            {
+                return Ok(new ErrorModel { Message = "Wystąpił błąd przy usuwaniu powiadomienia.", StatusCode = 400 });
+            }
+        }
     }
 }

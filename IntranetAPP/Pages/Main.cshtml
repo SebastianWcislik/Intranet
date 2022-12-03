@@ -7,24 +7,96 @@
 
 <head>
     <script>
+        var webApiAddress = localStorage.getItem("WebApiAddress");
+        var user = JSON.parse(localStorage.getItem("user"));
+        var isAdmin = false;
+        var newsId = 0;
+
+        if (user.priviligeName == "SuperAdmin" || user.priviligeName == "Admin") {
+            isAdmin = true;
+        }
+
         function activate() {
             checkUserPriviliges();
             setLoginData();
 
+            getNews();
+        }
+
+        function deleteNews() {
+            if (newsId == 0) {
+                return;
+            }
+            else {
+                $.post(webApiAddress + "/DeleteNews?Id=" + newsId, function (data) {
+                    if (data.statusCode == 200) {
+                        getNews();
+                        toggleDialog(0);
+                    }
+                    else {
+                        alert(data.message);
+                    }
+                })
+            }
+        }
+
+        function toggleDialog(id)
+        {
+            $('#myModal').modal('toggle');
+            newsId = id;
+        }
+
+        function getNews() {
             document.getElementById("loader").style.display = "block";
 
-            $.get("http://localhost:5249/GetNews", function (data) {
+            $.get(webApiAddress + "/GetNews", function (data) {
                 let list = document.getElementById("list");
 
-                data.forEach((item) => {
+                if (list.childNodes.length != 0) {
+                    while (list.firstChild) {
+                        list.removeChild(list.firstChild);
+                    }
+                }
+
+                if (data.length != 0) {
+                    data.forEach((item) => {
+                        if (isAdmin) {
+                            var deleteSpan = document.createElement("span");
+                            deleteSpan.innerHTML = "&times";
+                            deleteSpan.addEventListener("click", function () { toggleDialog(item.id) });
+                            deleteSpan.style.cursor = "pointer";
+                            deleteSpan.style.float = "right";
+                            deleteSpan.setAttribute("class", "deleteSpan");
+                        }
+
+                        let li = document.createElement("li");
+                        li.style.fontWeight = "bold";
+                        li.innerText = item.title;
+                        li.style.marginTop = "25px";
+                        if (isAdmin) {
+                            li.style.marginLeft = "11px";
+                        }
+                        li.setAttribute("class", "liNews");
+
+                        let li2 = document.createElement("li");
+                        li2.innerText = item.description;
+                        li2.setAttribute("class", "liNews");
+
+                        list.appendChild(li);
+                        list.appendChild(li2);
+                        if (isAdmin) {
+                            li.appendChild(deleteSpan);
+                        }
+                    });
+                }
+                else {
                     let li = document.createElement("li");
                     li.style.fontWeight = "bold";
-                    let li2 = document.createElement("li");
-                    li.innerText = item.title;
-                    li2.innerText = item.description;
+                    li.innerText = "Brak wiadomości do wyświetlenia";
+                    li.style.marginTop = "25px";
+
                     list.appendChild(li);
-                    list.appendChild(li2);
-                });
+                }
 
                 document.getElementById("loader").style.display = "none";
             });
@@ -38,4 +110,24 @@
         <ul id="list" style="list-style-type: none; padding-left: 0px"></ul>
         <div class="loader" id="loader" style="margin-left: auto; margin-right: auto; display: none"></div>
     </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Potwierdzenie usunięcia wiadomości</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="toggleDialog(0)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Czy na pewno chcesz usunąć zaznaczoną wiadomość?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="toggleDialog(0)">Zamknij</button>
+        <button type="button" class="btn btn-primary" onclick="deleteNews()">Potwierdź</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>

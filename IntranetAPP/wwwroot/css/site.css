@@ -50,3 +50,16 @@ input::placeholder {
 .login{
     height:100%
 }
+
+.deleteSpan {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.8s linear;
+}
+
+.liNews:hover > .deleteSpan {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+    animation-delay: 1s;
+}
